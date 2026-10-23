@@ -1,0 +1,10 @@
+{
+  "name": "kelvjessia-transport-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interactive client demonstration for KelvJessia Transport.",
+  "scripts": {
+    "preview": "npx serve dist",
+    "test": "node tests/booking-rules.test.mjs"
+  }
+}

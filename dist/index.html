@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#091633" />
+  <title>KelvJessia Transport | Safe. Reliable. Comfortable.</title>
+  <meta name="description" content="A private concept demonstration for KelvJessia Transport." />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="loader" class="loader" aria-label="Loading"><div class="loader-mark">KJ</div><div class="loader-bar"><i></i></div></div>
+  <div class="demo-bar">Concept Demonstration — Not an Official KelvJessia Transport Booking Platform.</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="KelvJessia Transport home"><span>KJ</span><b>KelvJessia</b><em>Transport</em></a>
+    <button id="menuButton" class="menu-button" aria-expanded="false" aria-controls="nav">Menu <span>☰</span></button>
+    <nav id="nav" class="nav" aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#about">About Us</a><a href="#services">Our Services</a><a href="#booking">Book a Trip</a><a href="#fleet">Our Fleet</a><a href="#contact">Contact Us</a>
+    </nav>
+    <div class="nav-actions"><a class="button ghost" href="#booking">Book now</a><button class="button text-button" data-enquiry>Prepare enquiry</button></div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-image"></div><div class="hero-shade"></div><div class="hero-grid"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow light">Lagos, Nigeria <i></i> concept booking experience</p>
+        <h1>Your Journey,<br><span>Our Priority.</span></h1>
+        <p class="hero-text">Experience safe, reliable, and comfortable transportation. From university journeys to airport transfers and group travel, KelvJessia makes every journey easier.</p>
+        <div class="hero-actions"><a class="button primary" href="#booking">Book your trip <b>→</b></a><a class="button white" href="#services">Explore services</a></div>
+        <p class="hero-note">Illustrative concept • No real reservation or payment is created</p>
+      </div>
+      <div class="booking-card reveal" id="booking">
+        <div class="booking-card-head"><div><p class="eyebrow">Plan your ride</p><h2>Where are you headed?</h2></div><span class="chip">Demo mode</span></div>
+        <form id="searchForm" class="search-form">
+          <label>Pickup location<select id="pickup" required><option value="">Choose a pickup</option><option>Augustine University, Ilara-Epe</option><option>Lagos Airport (LOS)</option><option>Victoria Island, Lagos</option><option>Ikorodu, Lagos</option></select></label>
+          <label>Destination<select id="destination" required><option value="">Choose a destination</option><option>Lagos</option><option>Augustine University, Ilara-Epe</option><option>Lagos Airport (LOS)</option><option>Victoria Island, Lagos</option></select></label>
+          <label>Travel date<input id="travelDate" type="date" required /></label>
+          <label>Passengers<select id="passengers"><option value="1">1 passenger</option><option value="2">2 passengers</option><option value="3">3 passengers</option><option value="4">4 passengers</option><option value="5">5 passengers</option></select></label>
+          <button class="button primary search-button" type="submit">Search sample trips <b>→</b></button>
+        </form>
+        <p id="searchMessage" class="form-message" aria-live="polite">Choose a route to preview illustrative options.</p>
+      </div>
+      <a class="scroll-cue" href="#services">Scroll to explore <span>↓</span></a>
+    </section>
+
+    <section id="services" class="section services-section">
+      <div class="section-intro reveal"><p class="eyebrow">Move with confidence</p><h2>Thoughtful transport for every <span>important journey.</span></h2><p>From campus to terminal, business plans to special days — find a service designed around your group.</p></div>
+      <div class="service-grid">
+        <article class="service-card reveal"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80" alt="Students walking outdoors"/><div class="service-body"><span class="icon">⌂</span><h3>Student transportation</h3><p>Convenient transport enquiries and reservation requests for Augustine University students.</p><a href="#student">Explore student travel <b>→</b></a></div></article>
+        <article class="service-card reveal"><img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=900&q=80" alt="Airport terminal exterior"/><div class="service-body"><span class="icon">✈</span><h3>Airport transfers</h3><p>Make an enquiry for calm, coordinated airport pickup and drop-off plans.</p><button data-enquiry data-service="Airport transfer">Prepare an enquiry <b>→</b></button></div></article>
+        <article class="service-card reveal"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Colleagues in a meeting"/><div class="service-body"><span class="icon">▦</span><h3>Corporate & group travel</h3><p>Organized transport solutions for business teams, associations, and groups.</p><button data-enquiry data-service="Corporate or group travel">Plan your group <b>→</b></button></div></article>
+        <article class="service-card reveal"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=80" alt="Decorated event space"/><div class="service-body"><span class="icon">✦</span><h3>Event transportation</h3><p>Transport arrangement enquiries for events and special occasions.</p><button data-enquiry data-service="Event transportation">Arrange transport <b>→</b></button></div></article>
+      </div>
+    </section>
+
+    <section id="about" class="section split-section">
+      <div class="image-collage reveal"><img class="collage-main" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1100&q=85" alt="Illustrative passenger bus on a road"/><div class="floating-card"><b>01</b><span>Comfort begins before<br>the journey does.</span></div><img class="collage-small" src="https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=600&q=80" alt="Traveller beside luggage"/></div>
+      <div class="split-copy reveal"><p class="eyebrow">Why KelvJessia</p><h2>A better way to get <span>there.</span></h2><p>KelvJessia Transport is envisioned as an approachable, well-organized service for the journeys people need to make with confidence across Lagos and beyond.</p><div class="benefits"><div><b>01</b><span><strong>Safety-focused</strong><small>Travel planning that puts care first.</small></span></div><div><b>02</b><span><strong>Reliable coordination</strong><small>Clear, human booking support.</small></span></div><div><b>03</b><span><strong>Flexible for groups</strong><small>Transport that adapts to your plan.</small></span></div><div><b>04</b><span><strong>Comfort-minded</strong><small>Thoughtful journeys, door to door.</small></span></div></div></div>
+    </section>
+
+    <section class="section how-section"><div class="section-intro center reveal"><p class="eyebrow">Simple by design</p><h2>From search to reservation<br><span>in a few considered steps.</span></h2></div><ol class="steps"><li class="reveal"><b>01</b><span class="step-icon">⌖</span><h3>Choose a destination</h3><p>Tell us where your journey begins and ends.</p></li><li class="reveal"><b>02</b><span class="step-icon">◴</span><h3>Select a sample trip</h3><p>Review illustrative availability and timing.</p></li><li class="reveal"><b>03</b><span class="step-icon">✎</span><h3>Enter passenger details</h3><p>Submit your reservation request securely.</p></li><li class="reveal"><b>04</b><span class="step-icon">✓</span><h3>Receive approval</h3><p>In production, a team member confirms next steps.</p></li></ol></section>
+
+    <section id="student" class="student-section"><div class="student-visual"><div class="campus-photo"></div><div class="student-mark">AUI<br><span>STUDENT<br>TRAVEL</span></div></div><div class="student-copy reveal"><p class="eyebrow light">For Augustine University</p><h2>Travel made easier<br>for <span>AUI students.</span></h2><p>Explore sample route options, submit holiday transport enquiries, or start a seat request. No university partnership or endorsement is implied.</p><div class="student-points"><span>Campus pickup information</span><span>Holiday travel enquiries</span><span>WhatsApp-ready customer support</span></div><a href="#booking" class="button white">Start a student enquiry <b>→</b></a></div></section>
+
+    <section id="fleet" class="section fleet-section"><div class="fleet-heading reveal"><div><p class="eyebrow">Illustrative fleet</p><h2>Comfort shaped for<br><span>your kind of journey.</span></h2></div><p>Representative photography and capacities only. Final vehicle images, specifications, and availability require confirmation.</p></div><div class="fleet-grid"><article class="fleet-card reveal"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80" alt="Illustrative passenger bus"/><div><span>Passenger buses</span><h3>Group coach</h3><p>Illustrative 30–50 seat capacity</p><button data-enquiry data-service="Passenger bus booking">Request booking <b>→</b></button></div></article><article class="fleet-card reveal"><img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1000&q=80" alt="Illustrative mini bus"/><div><span>Mini buses</span><h3>City shuttle</h3><p>Illustrative 12–18 seat capacity</p><button data-enquiry data-service="Mini bus booking">Request booking <b>→</b></button></div></article><article class="fleet-card reveal"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=80" alt="Illustrative executive van"/><div><span>Executive vans</span><h3>Executive transfer</h3><p>Illustrative 6–12 seat capacity</p><button data-enquiry data-service="Executive van booking">Request booking <b>→</b></button></div></article></div></section>
+
+    <section id="bookingDesk" class="booking-desk section"><div class="section-intro"><p class="eyebrow">Reservation desk</p><h2>Find a sample trip,<br><span>then make it yours.</span></h2><p>Use the planner above or choose a sample trip below. Your request remains on this device and is clearly marked simulated.</p></div><div id="tripResults" class="trip-results"><div class="empty-state">Search a route above to see illustrative trip choices.</div></div></section>
+
+    <section class="section faq-section"><div class="faq-intro reveal"><p class="eyebrow">Useful to know</p><h2>Questions, answered<br><span>with clarity.</span></h2><button data-enquiry class="button primary">Prepare an enquiry <b>→</b></button></div><div class="faqs reveal"><details><summary>Is this an official booking platform?<b>+</b></summary><p>No. This is a private concept demonstration. All trips, fares, capacities, bookings, and contacts are sample data until KelvJessia authorizes launch.</p></details><details><summary>Can I make a real payment here?<b>+</b></summary><p>No. Payments are intentionally unavailable in this concept. A future Paystack integration must be authorized and verified server-side.</p></details><details><summary>Will a reservation confirm a seat?<b>+</b></summary><p>No. The demo creates a local simulated request only. In production, a reservation remains pending until KelvJessia reviews it.</p></details><details><summary>How do I arrange group transport?<b>+</b></summary><p>Use “Prepare an enquiry” to compose the information a support team would need. A verified WhatsApp Business number is required before launch.</p></details></div></section>
+
+    <section id="contact" class="contact-section"><div class="contact-copy reveal"><p class="eyebrow light">Let’s plan your journey</p><h2>Every good trip<br>starts with a <span>hello.</span></h2><p>Contact information below was transcribed from a promotional flyer and should be verified before public launch.</p><div class="contact-links"><a href="mailto:stkelvjessia@gmail.com">stkelvjessia@gmail.com <b>↗</b></a><a href="tel:08036168642">0803 616 8642 <b>↗</b></a><a href="tel:08033510207">0803 351 0207 <b>↗</b></a><a href="tel:09125152866">0912 515 2866 <b>↗</b></a></div></div><form id="contactForm" class="contact-form reveal"><h3>Send a concept enquiry</h3><label>Your name<input required name="name" autocomplete="name" placeholder="Your full name" /></label><label>Email address<input required type="email" name="email" autocomplete="email" placeholder="you@example.com" /></label><label>How can we help?<textarea required name="message" rows="4" placeholder="Tell us a little about your journey"></textarea></label><button class="button primary" type="submit">Save enquiry locally <b>→</b></button><p id="contactMessage" class="form-message" aria-live="polite"></p></form></section>
+  </main>
+
+  <footer><a class="brand" href="#home"><span>KJ</span><b>KelvJessia</b><em>Transport</em></a><p>Safe. Reliable. Comfortable.</p><div><a href="#services">Services</a><a href="#fleet">Fleet</a><a href="#contact">Contact</a><button id="adminOpen">Admin demo</button></div><small>© <span id="year"></span> KelvJessia Transport concept. Not for live bookings.</small></footer>
+
+  <dialog id="bookingModal" class="modal"><button class="modal-close" data-close aria-label="Close">×</button><div id="bookingModalContent"></div></dialog>
+  <dialog id="enquiryModal" class="modal compact"><button class="modal-close" data-close aria-label="Close">×</button><div><p class="eyebrow">Prepared enquiry</p><h2>Ready for a verified<br><span>WhatsApp number.</span></h2><p>This concept cannot message a business number until it has been verified. Copy the prepared text and send it once the official WhatsApp Business number is confirmed.</p><textarea id="enquiryText" rows="10" readonly></textarea><button id="copyEnquiry" class="button primary">Copy enquiry <b>→</b></button><p id="copyMessage" class="form-message" aria-live="polite"></p></div></dialog>
+  <dialog id="adminModal" class="modal admin-modal"><button class="modal-close" data-close aria-label="Close">×</button><div id="adminContent"></div></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
