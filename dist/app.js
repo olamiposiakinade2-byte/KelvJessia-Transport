@@ -17,6 +17,9 @@ const toast = message => { const el=$('#toast'); el.textContent=message; el.clas
 const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 
 window.addEventListener('load',()=>setTimeout(()=>$('#loader').classList.add('done'),900));
+const motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reveal = new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');reveal.unobserve(entry.target);}}),{threshold:.12});
+$$('.reveal').forEach(item=>motion ? item.classList.add('is-visible') : reveal.observe(item));
 $('#year').textContent = new Date().getFullYear();
 const menuButton = $('#menuButton'); menuButton.addEventListener('click',()=>{ const open=$('#nav').classList.toggle('open'); menuButton.setAttribute('aria-expanded',open); });
 $$('#nav a').forEach(a=>a.addEventListener('click',()=>$('#nav').classList.remove('open')));
@@ -25,15 +28,20 @@ const today = new Date(); today.setDate(today.getDate()+1); $('#travelDate').min
 function renderTrips(){
   const pickup=$('#pickup').value, destination=$('#destination').value, count=Number($('#passengers').value);
   state.passengerCount=count;
+  if(!pickup||!destination){$('#tripResults').innerHTML='<div class="empty-state">Choose both endpoints to preview illustrative trip choices.</div>';return;}
+  $('#searchMessage').textContent='Looking for sample journeys…';
+  $('#tripResults').innerHTML='<div class="skeleton-list" aria-label="Loading sample trips"><div class="skeleton"></div><div class="skeleton"></div></div>';
+  $('#bookingDesk').scrollIntoView({behavior:'smooth',block:'start'});
+  window.setTimeout(()=>renderTripResults(pickup,destination,count),420);
+}
+function renderTripResults(pickup,destination,count){
   const relevant=sampleTrips.filter(t=>{
     if(pickup.includes('Airport')||destination.includes('Airport')) return t.id==='trip-airport-vi';
     return t.id!=='trip-airport-vi';
   }).map(t=>({...t,seats:Math.max(0,t.seats-getBookings().filter(b=>b.status!=='Cancelled'&&b.status!=='Completed'&&b.route===t.name).reduce((sum,b)=>sum+b.seats,0))}));
-  if(!pickup||!destination){$('#tripResults').innerHTML='<div class="empty-state">Choose both endpoints to preview illustrative trip choices.</div>';return;}
   $('#searchMessage').textContent=`Showing illustrative options for ${pickup} to ${destination}.`;
   $('#tripResults').innerHTML=`<div class="trip-list">${relevant.map(t=>`<article class="trip"><div><div class="route">${t.name}</div><small>${escapeHtml(t.vehicle)}</small></div><div><strong>${t.time}</strong><small>${t.arrival}</small></div><div><strong>${t.seats} sample seats</strong><small>Demo-only availability</small></div><div class="demo-fare"><strong>—</strong><small>${t.fare}</small></div><button class="button primary select-trip" data-trip="${t.id}" ${t.seats<count?'disabled':''}>${t.seats<count?'Not enough seats':'Select trip'} <b>→</b></button></article>`).join('')}</div>`;
   $$('.select-trip').forEach(button=>button.addEventListener('click',()=>openBooking(button.dataset.trip,relevant)));
-  $('#bookingDesk').scrollIntoView({behavior:'smooth',block:'start'});
 }
 $('#searchForm').addEventListener('submit',event=>{event.preventDefault();renderTrips();});
 function openBooking(id, trips=sampleTrips){
@@ -58,6 +66,9 @@ function openEnquiry(service='', reference=''){
 }
 $$('[data-enquiry]').forEach(button=>button.addEventListener('click',()=>openEnquiry(button.dataset.service||'',button.dataset.reference||'')));
 $('#copyEnquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#enquiryText').value);$('#copyMessage').textContent='Enquiry copied. Add the verified WhatsApp Business number before sending.';}catch{$('#enquiryText').select();$('#copyMessage').textContent='Select and copy the prepared enquiry.';}});
+function openLookup(){ $('#lookupReference').value=''; $('#lookupResult').innerHTML=''; $('#lookupModal').showModal(); $('#lookupReference').focus(); }
+$('#lookupOpen').addEventListener('click',openLookup); $('#deskLookupOpen').addEventListener('click',openLookup);
+$('#lookupForm').addEventListener('submit',event=>{event.preventDefault();const reference=$('#lookupReference').value.trim().toUpperCase();const booking=getBookings().find(item=>item.id===reference);$('#lookupResult').innerHTML=booking?`<div class="lookup-hit"><strong>${escapeHtml(booking.id)} · ${escapeHtml(booking.status)}</strong><span>${escapeHtml(booking.route)} · ${escapeHtml(booking.date)} at ${escapeHtml(booking.time)} · ${booking.seats} passenger${booking.seats>1?'s':''}</span></div>`:'<div class="empty-state">No local demo booking matches that reference. Check the characters and try again.</div>';});
 $$('[data-close]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog').close()));
 $('#contactForm').addEventListener('submit',event=>{event.preventDefault();const enquiries=JSON.parse(localStorage.getItem('kj-demo-enquiries')||'[]');enquiries.push({...Object.fromEntries(new FormData(event.currentTarget)),createdAt:new Date().toISOString()});localStorage.setItem('kj-demo-enquiries',JSON.stringify(enquiries));event.currentTarget.reset();$('#contactMessage').textContent='Saved only on this device — no message has been sent.';});
 
