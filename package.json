@@ -5,6 +5,7 @@
   "description": "Interactive client demonstration for KelvJessia Transport.",
   "scripts": {
     "preview": "npx serve dist",
+    "api": "node server/app.mjs",
     "test": "node tests/booking-rules.test.mjs"
   }
 }
