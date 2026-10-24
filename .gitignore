@@ -1,0 +1,4 @@
+server/*.db
+server/*.db-shm
+server/*.db-wal
+.env.local
