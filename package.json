@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "Interactive client demonstration for KelvJessia Transport.",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "preview": "npx serve dist",
     "api": "node server/app.mjs",

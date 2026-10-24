@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: kelvjessia-transport-api
+    runtime: node
+    plan: starter
+    buildCommand: npm install --ignore-scripts
+    startCommand: npm run api
+    healthCheckPath: /api/health
+    envVars:
+      - key: KELVJESSIA_DB_PATH
+        value: /var/data/kelvjessia.db
+      - key: KELVJESSIA_ALLOWED_ORIGIN
+        value: https://kelvjessia-transport-demo.chic-grass-4458.chatgpt.site
+    disk:
+      name: kelvjessia-bookings
+      mountPath: /var/data
+      sizeGB: 1
