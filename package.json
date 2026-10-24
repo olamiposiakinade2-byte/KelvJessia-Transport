@@ -9,6 +9,6 @@
   "scripts": {
     "preview": "npx serve dist",
     "api": "node server/app.mjs",
-    "test": "node tests/booking-rules.test.mjs"
+    "test": "node tests/booking-rules.test.mjs && node tests/whatsapp-handoff.test.mjs"
   }
 }
