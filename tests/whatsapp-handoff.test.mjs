@@ -7,7 +7,7 @@ const message = [
   'Hello KelvJessia Transport,',
   '',
   'BOOKING REQUEST',
-  'Booking Reference: KJ-DEMO-TEST',
+  'Booking Reference: KJ-TEST',
   'Customer Name: Test Passenger',
   'Customer Phone: 08000000000',
   'Pickup Location: Augustine University, Ilara-Epe',
