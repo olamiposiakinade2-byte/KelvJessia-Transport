@@ -4,6 +4,20 @@ const WHATSAPP_NUMBER = '2348036168642';
 const DEMO_STORAGE_KEY = 'kelvjessia-sample-bookings-v1';
 const state = { selectedTrip: null, draft: null, sending: false };
 
+// This script is loaded at the end of the document, so the page is ready to
+// display as soon as its interactive controls are available. Do not wait for
+// remote images or optional report libraries: either can be slow or blocked.
+function dismissLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  window.requestAnimationFrame(() => {
+    loader.classList.add('done');
+    window.setTimeout(() => loader.remove(), 500);
+  });
+}
+
+dismissLoader();
+
 const sampleTrips = [
   { id: 'aui-lagos-0800', origin: 'Augustine University, Ilara-Epe', destination: 'Lagos', time: '08:00', arrival: 'Approx. 10:30', capacity: 18, vehicle: 'Sample passenger bus' },
   { id: 'aui-lagos-1430', origin: 'Augustine University, Ilara-Epe', destination: 'Lagos', time: '14:30', arrival: 'Approx. 17:00', capacity: 18, vehicle: 'Sample mini bus' },

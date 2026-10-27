@@ -16,5 +16,7 @@ assert.match(source, /Reset Demo Data/);
 assert.match(source, /Download Booking Report \(PDF\)/);
 assert.match(source, /DEMO — SAMPLE DATA/);
 assert.match(source, /booking\.status !== 'Cancelled'/);
+assert.match(source, /function dismissLoader\(\)/);
+assert.match(source, /loader\.classList\.add\('done'\)/);
 
-console.log('Sample booking capacity, CSV safety, and dashboard controls validated.');
+console.log('Sample booking capacity, loader dismissal, CSV safety, and dashboard controls validated.');
