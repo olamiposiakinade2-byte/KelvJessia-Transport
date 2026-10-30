@@ -11,6 +11,14 @@ services:
         value: /var/data/kelvjessia.db
       - key: KELVJESSIA_ALLOWED_ORIGIN
         value: https://kelvjessia-transport-demo.chic-grass-4458.chatgpt.site
+      - key: KELVJESSIA_PAYMENTS_TEST_MODE
+        value: "true"
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: PAYSTACK_CALLBACK_URL
+        sync: false
+      - key: KELVJESSIA_ADMIN_TOKEN
+        sync: false
     disk:
       name: kelvjessia-bookings
       mountPath: /var/data
