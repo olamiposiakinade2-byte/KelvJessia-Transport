@@ -3,12 +3,12 @@ import { readFileSync } from 'node:fs';
 
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const schema = read('../database/003_booking_payments_operations.sql');
-const library = read('../api/_lib.mjs');
-const initialize = read('../api/payments/initialize.mjs');
-const webhook = read('../api/payments/paystack-webhook.mjs');
-const enquiries = read('../api/enquiries.mjs');
-const driverTrips = read('../api/driver/trips.mjs');
-const operations = read('../api/admin/operations.mjs');
+const library = read('../staging-api/_lib.mjs');
+const initialize = read('../staging-api/payments/initialize.mjs');
+const webhook = read('../staging-api/payments/paystack-webhook.mjs');
+const enquiries = read('../staging-api/enquiries.mjs');
+const driverTrips = read('../staging-api/driver/trips.mjs');
+const operations = read('../staging-api/admin/operations.mjs');
 const client = read('../dist/booking-demo.js');
 const receipt = read('../dist/payment.js');
 

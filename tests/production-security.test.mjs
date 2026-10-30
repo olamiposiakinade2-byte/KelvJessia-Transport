@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const schema = readFileSync(new URL('../database/002_production_booking_schema.sql', import.meta.url), 'utf8');
-const bookingApi = readFileSync(new URL('../api/bookings.mjs', import.meta.url), 'utf8');
-const apiLibrary = readFileSync(new URL('../api/_lib.mjs', import.meta.url), 'utf8');
+const bookingApi = readFileSync(new URL('../staging-api/bookings.mjs', import.meta.url), 'utf8');
+const apiLibrary = readFileSync(new URL('../staging-api/_lib.mjs', import.meta.url), 'utf8');
 const client = readFileSync(new URL('../dist/booking-demo.js', import.meta.url), 'utf8');
 
 assert.match(schema, /for update;/i);

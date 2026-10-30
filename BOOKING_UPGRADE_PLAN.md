@@ -7,7 +7,9 @@ Audited: 28 October 2026 (Africa/Lagos)
 - `dist/` is the deployed static HTML/CSS/browser-JavaScript website.
 - `booking-demo.js` supplies the default, clearly labelled fictional-data and
   WhatsApp-request experience. It does not persist customer data.
-- `api/` contains Vercel serverless functions. They are disabled unless an
+- `staging-api/` contains the staged serverless functions. They are excluded
+  from the Hobby static deployment and disabled unless a protected staging
+  backend is explicitly configured.
   explicit staging or approved-live environment gate is enabled.
 - `database/002_production_booking_schema.sql` is the intended protected
   PostgreSQL/Supabase booking baseline. It already has row-locking for seats,

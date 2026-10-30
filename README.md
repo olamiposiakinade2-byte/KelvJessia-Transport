@@ -20,7 +20,7 @@ npm run preview
 
 ## API service
 
-`server/` contains an earlier Node/SQLite proof of concept and is not used by Vercel. The staged Supabase implementation uses the Vercel functions in `api/` together with the reviewed migrations `database/002_production_booking_schema.sql` and `database/003_booking_payments_operations.sql`. It remains disabled unless the server-only environment gates described in [docs/STAGING_DEPLOYMENT.md](docs/STAGING_DEPLOYMENT.md) are explicitly enabled.
+`server/` contains an earlier Node/SQLite proof of concept and is not used by Vercel. The staged Supabase implementation is kept in `staging-api/` together with the reviewed migrations `database/002_production_booking_schema.sql` and `database/003_booking_payments_operations.sql`. It is deliberately excluded from the Hobby static deployment, which has a 12-function limit. Deploy it only as a protected staging backend after consolidating its routes or using a plan that supports the required function count.
 
 ## Booking upgrade capabilities (staging only)
 

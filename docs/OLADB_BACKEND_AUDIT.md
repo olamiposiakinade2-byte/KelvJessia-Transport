@@ -6,14 +6,14 @@ Audited: 28 October 2026 (Africa/Lagos)
 
 The public KelvJessia Transport website remains a static Vercel deployment in
 demo mode by default. The database-backed APIs are serverless functions under
-`api/`, and are gated behind staging/approval environment variables. This
+`staging-api/`, and are gated behind staging/approval environment variables. This
 audit makes no change to the public site, Supabase project, or payment mode.
 
 ## Supabase dependencies to replace
 
 | Current dependency | Current use | OlaDB replacement |
 | --- | --- | --- |
-| Supabase REST API | `api/_lib.mjs` sends server-side `/rest/v1` and `/rpc` calls. | TypeScript repository services using Prisma and parameterized PostgreSQL transactions. |
+| Supabase REST API | `staging-api/_lib.mjs` sends server-side `/rest/v1` and `/rpc` calls. | TypeScript repository services using Prisma and parameterized PostgreSQL transactions. |
 | Supabase Auth | Admin login calls `/auth/v1/token`; staff identity calls `/auth/v1/user`; logout calls `/auth/v1/logout`. | Local credential records, bcrypt password verification, opaque server-side sessions, HTTP-only cookies, revocation and login throttling. |
 | Supabase service-role key | Server-only database authority and role lookup. | A least-privilege `oladb_app` PostgreSQL user available only to the OlaDB server process. |
 | Supabase RLS/Data API grants | Protects public-schema tables from `anon` and `authenticated`. | No direct database/Data API exposure. PostgreSQL is reachable only from OlaDB; authorization is enforced in server routes and transactions. |
@@ -54,13 +54,13 @@ grants, RLS policies, the Data API contract, and RPC invocation over HTTP.
 
 | Area | Current API/function | Required OlaDB service |
 | --- | --- | --- |
-| Trips | `api/trips.mjs` / `list_server_trips` | published-trip availability query with locked active holds excluded from availability. |
-| Booking | `api/bookings.mjs` / `create_server_booking` | transaction: idempotency lookup, fingerprint rate limit, `FOR UPDATE` trip lock, expiry sweep, capacity check, pending hold insert. |
+| Trips | `staging-api/trips.mjs` / `list_server_trips` | published-trip availability query with locked active holds excluded from availability. |
+| Booking | `staging-api/bookings.mjs` / `create_server_booking` | transaction: idempotency lookup, fingerprint rate limit, `FOR UPDATE` trip lock, expiry sweep, capacity check, pending hold insert. |
 | Payments | initialize, verify, webhook / `create_payment_attempt`, `record_verified_payment` | Paystack server client plus transactional payment service and unique event hash. |
-| Expiry | `api/internal/expire-reservations.mjs` / `expire_unpaid_reservations` | authenticated scheduler worker calling a single idempotent expiry transaction. |
-| Enquiries | `api/enquiries.mjs`, `api/admin/enquiries.mjs` | rate-limited public submission and role-protected staff workflow. |
+| Expiry | `staging-api/internal/expire-reservations.mjs` / `expire_unpaid_reservations` | authenticated scheduler worker calling a single idempotent expiry transaction. |
+| Enquiries | `staging-api/enquiries.mjs`, `staging-api/admin/enquiries.mjs` | rate-limited public submission and role-protected staff workflow. |
 | Operations | admin trips, vehicles, drivers, locations, settings | validated, role-protected OlaDB REST routes with audit records. |
-| Driver events | `api/driver/trips.mjs` / `record_passenger_event` | assigned-driver authorization and server-generated pickup/drop-off timestamps. |
+| Driver events | `staging-api/driver/trips.mjs` / `record_passenger_event` | assigned-driver authorization and server-generated pickup/drop-off timestamps. |
 
 ## Environment-variable audit
 
