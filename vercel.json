@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node -e \"console.log('Using committed static dist output')\"",
   "outputDirectory": "dist",
   "crons": [
     {
