@@ -59,9 +59,11 @@ In the **Preview** environment only, set encrypted values from `.env.example`:
 Do not use a `pk_live_` or `sk_live_` key. Add the protected Preview URL to
 Supabase Auth redirect URLs, configure the Paystack **test-mode** webhook as
 `https://<protected-preview-domain>/api/payments/paystack-webhook`, and keep
-the Preview URL inaccessible to the public. Vercel Cron must be available for
-the project plan; it calls the `/api/internal/expire-reservations` route every
-five minutes using `CRON_SECRET`.
+the Preview URL inaccessible to the public. Configure a protected external
+scheduler to call `/api/internal/expire-reservations` every five minutes using
+`CRON_SECRET`. Vercel Hobby cannot run this frequency, so the repository does
+not declare a Vercel Cron; use a protected staging worker or a Vercel plan
+that supports it.
 
 ## 3. Staging acceptance tests
 

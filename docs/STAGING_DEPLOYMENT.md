@@ -33,10 +33,13 @@ Vercel domain with the repository defaults.
    `https://<protected-preview-domain>/api/payments/paystack-webhook`. Add only
    fictional vehicles, drivers, trips, and customer records to staging.
 
-6. Configure the Vercel Cron route declared in `vercel.json`. It calls the
-   protected expiry endpoint every five minutes. The database also checks
-   expiry in every seat-allocation/payment transaction, so closing a browser
-   cannot retain a seat indefinitely.
+6. Configure a protected, authenticated scheduler to call
+   `/api/internal/expire-reservations` every five minutes with `CRON_SECRET`.
+   The repository deliberately does not declare a Vercel Cron because Vercel
+   Hobby plans reject schedules more frequent than daily. Use a protected
+   staging worker or a Vercel plan that supports the required frequency. The
+   database also checks expiry in every seat-allocation/payment transaction,
+   so closing a browser cannot retain a seat indefinitely.
 
 ## Production promotion gate
 

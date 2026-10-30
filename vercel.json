@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "node -e \"console.log('Using committed static dist output')\"",
-  "outputDirectory": "dist",
-  "crons": [
-    {
-      "path": "/api/internal/expire-reservations",
-      "schedule": "*/5 * * * *"
-    }
-  ]
+  "outputDirectory": "dist"
 }
