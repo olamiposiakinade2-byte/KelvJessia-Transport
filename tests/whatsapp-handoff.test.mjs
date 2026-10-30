@@ -21,7 +21,7 @@ const message = [
 const handoff = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 
 assert.match(source, /const WHATSAPP_NUMBER = '2348036168642'/);
-assert.match(source, /Continue to WhatsApp/);
+assert.match(source, /Confirm Booking via WhatsApp/);
 assert.match(source, /encodeURIComponent\(message\)/);
 assert.match(source, /BOOKING STATUS: AWAITING COMPANY CONFIRMATION/);
 assert.match(source, /window\.open\(url, '_blank', 'noopener'\)/);

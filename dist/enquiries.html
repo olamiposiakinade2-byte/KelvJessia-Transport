@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#091633" />
+  <title>Enquiries | KelvJessia Transport</title>
+  <meta name="description" content="Send a transport enquiry to KelvJessia Transport." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="enquiry-page">
+  <div class="demo-bar"><strong>CONCEPT DEMONSTRATION</strong> — The secure enquiry service is available only in a protected staging deployment.</div>
+  <header class="site-header enquiry-header">
+    <a class="brand" href="index.html#home" aria-label="KelvJessia Transport home"><span>KJ</span><b>KelvJessia</b><em>Transport</em></a>
+    <nav class="nav enquiry-nav" aria-label="Main navigation"><a href="index.html#booking">Book a Trip</a><a href="index.html#contact">Contact</a></nav>
+  </header>
+  <main class="enquiry-main">
+    <section class="enquiry-copy"><p class="eyebrow">Customer support</p><h1>How can we<br><span>help you?</span></h1><p>Send a clear enquiry about your journey, payment, pickup, drop-off, or any other transport need. We keep your information private and never publish it.</p><a href="index.html#booking" class="button white">View available trips <b>→</b></a></section>
+    <section class="enquiry-card" aria-labelledby="enquiry-title"><p class="eyebrow">Enquiry desk</p><h2 id="enquiry-title">Tell us what you need.</h2><form id="enquiryForm" class="booking-form"><label>Full name<input name="fullName" required maxlength="120" autocomplete="name" placeholder="Your full name"></label><label>Email address<input name="email" required maxlength="254" type="email" autocomplete="email" placeholder="you@example.com"></label><label>Phone number<input name="phone" required maxlength="30" inputmode="tel" autocomplete="tel" placeholder="0800 000 0000"></label><label>Enquiry category<select name="category" required><option value="booking_assistance">Booking assistance</option><option value="payment_issues">Payment issues</option><option value="pickup_information">Pickup information</option><option value="dropoff_information">Drop-off information</option><option value="refund_requests">Refund requests</option><option value="general_enquiries">General enquiries</option><option value="complaints">Complaints</option></select></label><label class="wide">Subject<input name="subject" required minlength="3" maxlength="180" placeholder="A short summary"></label><label class="wide">Message<textarea name="message" required minlength="10" maxlength="4000" rows="6" placeholder="Tell us how we can help."></textarea></label><button class="button primary" type="submit">Submit enquiry <b>→</b></button><p id="enquiryMessage" class="form-message wide" aria-live="polite"></p></form></section>
+  </main>
+  <footer><a class="brand" href="index.html#home"><span>KJ</span><b>KelvJessia</b><em>Transport</em></a><p>Safe. Reliable. Comfortable.</p><div><a href="index.html#services">Services</a><a href="index.html#contact">Contact</a></div><small>© <span id="year"></span> KelvJessia Transport. Customer enquiries are handled privately.</small></footer>
+  <script src="enquiries.js"></script>
+</body>
+</html>

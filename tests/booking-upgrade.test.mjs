@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
+const schema = read('../database/003_booking_payments_operations.sql');
+const library = read('../api/_lib.mjs');
+const initialize = read('../api/payments/initialize.mjs');
+const webhook = read('../api/payments/paystack-webhook.mjs');
+const enquiries = read('../api/enquiries.mjs');
+const driverTrips = read('../api/driver/trips.mjs');
+const operations = read('../api/admin/operations.mjs');
+const client = read('../dist/booking-demo.js');
+const receipt = read('../dist/payment.js');
+
+assert.match(schema, /create table if not exists public\.payments/i);
+assert.match(schema, /create table if not exists public\.customer_enquiries/i);
+assert.match(schema, /create table if not exists public\.pickup_records/i);
+assert.match(schema, /create table if not exists public\.dropoff_records/i);
+assert.match(schema, /make_interval\(mins => private\.booking_hold_minutes\(\)\)/);
+assert.match(schema, /for update;/i);
+assert.match(schema, /recovery_required/);
+assert.match(schema, /on conflict \(event_hash\) do nothing/i);
+assert.match(schema, /v_payment\.status in \('successful', 'recovery_required', 'refunded'\)/);
+assert.match(schema, /alter table public\.payments enable row level security/i);
+assert.match(schema, /request_fingerprint.*15 minutes/is);
+assert.match(library, /crypto\.timingSafeEqual/);
+assert.match(library, /KELVJESSIA_PAYMENTS_TEST_MODE === 'true'/);
+assert.match(initialize, /amount: payment\.amount_kobo/);
+assert.doesNotMatch(initialize, /body\.amount|body\.price/);
+assert.match(webhook, /verifyPaystackSignature/);
+assert.match(webhook, /transaction\/verify/);
+assert.match(enquiries, /create_customer_enquiry/);
+assert.match(enquiries, /requestFingerprint/);
+assert.match(driverTrips, /requireRole\(req, \['driver'\]\)/);
+assert.match(driverTrips, /record_passenger_event/);
+assert.match(operations, /booking_settings/);
+assert.match(operations, /pickup_locations/);
+assert.match(operations, /audit_logs/);
+assert.match(client, /paymentApiEnabled/);
+assert.match(client, /Complete your payment within/);
+assert.match(receipt, /window\.print\(\)/);
+assert.doesNotMatch(client + receipt, /PAYSTACK_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY/);
+
+console.log('Payment, expiry, enquiry, driver-operation, and client secret-isolation safeguards validated.');

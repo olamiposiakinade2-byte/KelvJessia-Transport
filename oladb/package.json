@@ -1,0 +1,37 @@
+{
+  "name": "oladb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "tsx --test tests/**/*.test.ts",
+    "test:architecture": "node --test tests/architecture.test.mjs tests/payment-ledger-architecture.test.mjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "password:hash": "tsx scripts/hash-password.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.0",
+    "bcryptjs": "2.4.3",
+    "jose": "6.1.3",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.0",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "10.4.21",
+    "postcss": "8.5.6",
+    "prisma": "6.19.0",
+    "tailwindcss": "3.4.17",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}

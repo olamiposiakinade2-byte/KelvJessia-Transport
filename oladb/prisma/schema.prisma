@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProjectStatus { ACTIVE PAUSED ARCHIVED }
+enum BookingStatus { PENDING CONFIRMED CANCELLED COMPLETED EXPIRED }
+enum PaymentStatus { PENDING PROCESSING SUCCESSFUL FAILED EXPIRED REFUNDED RECOVERY_REQUIRED }
+
+model Project {
+  id        String        @id @default(cuid())
+  name      String        @unique
+  slug      String        @unique
+  status    ProjectStatus @default(ACTIVE)
+  isDemo    Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  vehicles  Vehicle[]
+  trips     Trip[]
+  bookings  Booking[]
+  payments  Payment[]
+}
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  projectId    String
+  name         String
+  registration String?
+  capacity     Int
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  trips        Trip[]
+  @@index([projectId, isActive])
+  @@unique([projectId, registration])
+}
+
+model Trip {
+  id          String   @id @default(cuid())
+  projectId   String
+  vehicleId   String
+  origin      String
+  destination String
+  departureAt DateTime
+  seatCapacity Int
+  fareKobo     Int?
+  isPublished Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  bookings    Booking[]
+  @@index([projectId, departureAt])
+}
+
+model Booking {
+  id                  String        @id @default(cuid())
+  projectId           String
+  tripId              String
+  reference           String        @unique
+  passengerName       String
+  passengerPhone      String
+  passengerEmail      String?
+  seatCount           Int
+  specialRequirements String?
+  status              BookingStatus @default(PENDING)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  project             Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  trip                Trip          @relation(fields: [tripId], references: [id], onDelete: Restrict)
+  history             BookingStatusHistory[]
+  holdExpiresAt       DateTime?
+  idempotencyKey      String?       @unique
+  amountKobo          Int?
+  paymentReference    String?       @unique
+  payments            Payment[]
+  @@index([projectId, status, createdAt])
+  @@index([tripId, status])
+  @@index([tripId, holdExpiresAt])
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  projectId             String
+  bookingId             String
+  provider              String        @default("paystack")
+  providerReference     String        @unique
+  initializationKey     String        @unique
+  amountKobo            Int
+  currency              String        @default("NGN")
+  status                PaymentStatus @default(PENDING)
+  providerTransactionId String?       @unique
+  providerPayload       Json?
+  verifiedAt            DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  project               Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  booking               Booking       @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+
+  @@index([projectId, status, createdAt])
+  @@index([bookingId, createdAt])
+}
+
+model PaymentWebhookEvent {
+  id                String   @id @default(cuid())
+  provider          String
+  eventHash         String   @unique
+  providerReference String?
+  eventType         String
+  receivedAt        DateTime @default(now())
+
+  @@index([providerReference, receivedAt])
+}
+
+model BookingStatusHistory {
+  id        String        @id @default(cuid())
+  bookingId String
+  oldStatus BookingStatus?
+  newStatus BookingStatus
+  note      String?
+  changedAt DateTime      @default(now())
+  booking   Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  @@index([bookingId, changedAt])
+}
