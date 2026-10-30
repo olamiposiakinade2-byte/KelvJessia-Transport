@@ -16,6 +16,7 @@ const message = [
   'Departure Time: 08:00',
   'Number of Seats: 2',
   'Special Requirements: None',
+  'Payment choice: Pay later after company confirmation',
   'BOOKING STATUS: AWAITING COMPANY CONFIRMATION'
 ].join('\n');
 const handoff = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
@@ -24,6 +25,7 @@ assert.match(source, /const WHATSAPP_NUMBER = '2348036168642'/);
 assert.match(source, /Confirm Booking via WhatsApp/);
 assert.match(source, /encodeURIComponent\(message\)/);
 assert.match(source, /BOOKING STATUS: AWAITING COMPANY CONFIRMATION/);
+assert.match(source, /Pay later after company confirmation/);
 assert.match(source, /window\.open\(url, '_blank', 'noopener'\)/);
 assert.equal(new URL(handoff).pathname, `/${number}`);
 assert.equal(new URL(handoff).searchParams.get('text'), message);
